@@ -1,0 +1,20 @@
+[
+	{
+		"WorkflowName" : "FindFrequentFruitsWorkflow",
+		"Rules" : [
+			{
+				"RuleName" : "CountFruit",
+				"RuleExpressionType" : "LambdaExpression",
+				"Expression" : "input1.GroupBy(i => i).Any(g => g.Count() > 1)",
+				"Actions" : {
+					"OnSuccess" : {
+						"Name" : "OutputExpression",
+						"Context" : {
+							"Expression" : " string.Join( \",\", input1.GroupBy(s => s).Where(g => g.Count() > 1).Select(g => g.Key).ToList().ToArray())"
+						}
+					}
+				}
+			}
+		]
+	}
+]
